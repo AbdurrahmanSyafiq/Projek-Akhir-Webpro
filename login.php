@@ -18,8 +18,9 @@
         <!-- Welcome Text -->
         <h2 class="text-center text-2xl font-semibold text-gray-700 mb-4">Selamat Datang,</h2>
         <p class="text-center text-gray-500 mb-6">Silahkan login terlebih dahulu</p>
+
         <!-- Login Form -->
-        <form action="process_login.php" method="POST" class="space-y-4">
+        <form action="" method="POST" class="space-y-4">
             <div>
                 <label for="username" class="block text-gray-600 font-medium">Username</label>
                 <input type="text" id="username" name="username" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" placeholder="Masukkan username" required>
