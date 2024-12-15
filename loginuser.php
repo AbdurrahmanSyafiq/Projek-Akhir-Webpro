@@ -6,7 +6,7 @@ $err = "";
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    if($username == "" || $password == "") {
+    if($username == "" or $password == "") {
         $err = "Username dan Password harus diisi";
     }
     if (empty($err)) {
@@ -14,11 +14,23 @@ if (isset($_POST['login'])) {
         $q1 = mysqli_query($koneksi, $sql1);
         $r1 = mysqli_fetch_array($q1);
         if ($r1['password'] != md5($password)) {
-            $err = "<li>Username dan Password salah<li>";
+            $err .= "<li>Username dan Password salah<li>";
+        }
+    }
+    if (empty($err)) {
+        $admin_id = $r1['admin_id'];
+        $sql1 = "select * from admin_akses where admin_id = '$admin_id'";
+        $q1 = mysqli_query($koneksi, $sql1);
+        while ($r1 = mysqli_fetch_array($q1)) {
+            $akses[] = $r1['akses_id'];
+        }
+        if(empty($akses)){
+            $err = "<li>Anda tidak memiliki akses<li>";
         }
     }
     if (empty($err)) {
         $_SESSION['admin_username'] = $username;
+        $_SESSION['admin_akses'] = $akses;
         header("Location: index.php");
         exit;
     }
@@ -48,7 +60,7 @@ if (isset($_POST['login'])) {
             <input type="password" name="password" class="input" placeholder="Isikan Password" /><br /><br />
             <input type="submit" name="login" value="Masuk Ke Sistem" />
         </form>
-        <p>Belum terdaftar ? <a href="register.php">Daftar disini</a></p>
+        <p>Belum terdaftar ? <a href="registeruser.php">Daftar disini</a></p>
     </div>
 </body>
 

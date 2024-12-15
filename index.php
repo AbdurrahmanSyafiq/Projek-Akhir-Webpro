@@ -24,7 +24,7 @@
                 <li><a href="#" class="hover:text-gray-900">Rekam Medis</a></li>
                 <li><a href="#" class="hover:text-gray-900">Dashboard (Admin Only)</a></li>
                 <li>
-                    <a href="loginuser.php" class="text-red-500 hover:text-red-700">Login/Register</a>
+                    <a href="logout.php" class="text-red-500 hover:text-red-700">Logout</a>
                 </li>
             </ul>
         </div>
