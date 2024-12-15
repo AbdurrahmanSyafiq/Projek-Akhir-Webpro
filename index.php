@@ -1,3 +1,10 @@
+<?php
+session_start();
+include("koneksi.php");
+if (!isset($_SESSION['admin_username'])) {
+    header("location:loginuser.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

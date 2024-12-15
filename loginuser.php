@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (isset($_SESSION['admin_username'])) {
+    header("location:index.php");
+}
 include 'koneksi.php';
 $username = "";
 $password = "";
@@ -14,7 +18,7 @@ if (isset($_POST['login'])) {
         $q1 = mysqli_query($koneksi, $sql1);
         $r1 = mysqli_fetch_array($q1);
         if ($r1['password'] != md5($password)) {
-            $err .= "<li>Username dan Password salah<li>";
+            $err .= "<li>Akun tidak ditemukan</li>";
         }
     }
     if (empty($err)) {
