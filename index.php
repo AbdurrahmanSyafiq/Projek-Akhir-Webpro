@@ -29,7 +29,9 @@ if (!isset($_SESSION['admin_username'])) {
                 <li><a href="#" class="hover:text-gray-900">Home</a></li>
                 <li><a href="#" class="hover:text-gray-900">Penjadwalan Konsultasi</a></li>
                 <li><a href="#" class="hover:text-gray-900">Rekam Medis</a></li>
-                <li><a href="#" class="hover:text-gray-900">Dashboard (Admin Only)</a></li>
+                <?php if(in_array("admin", $_SESSION['admin_akses'])){?>
+                    <li><a href="#" class="hover:text-gray-900">Dashboard (Admin Only)</a></li>
+                <?php } ?>
                 <li>
                     <a href="logout.php" class="text-red-500 hover:text-red-700">Logout</a>
                 </li>
