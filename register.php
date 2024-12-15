@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// Tangkap pesan sukses atau error jika ada
+$success_message = isset($_SESSION['success']) ? $_SESSION['success'] : null;
+$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : null;
+
+// Hapus session agar pesan hanya tampil sekali
+unset($_SESSION['success']);
+unset($_SESSION['error']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,27 +30,43 @@
         <!-- Welcome Text -->
         <h2 class="text-center text-2xl font-semibold text-gray-700 mb-4">Daftar Akun Baru</h2>
         <p class="text-center text-gray-500 mb-6">Silahkan isi data Anda untuk mendaftar</p>
+
+        <!-- Pesan Sukses -->
+        <?php if ($success_message): ?>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+                <?php echo $success_message; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Pesan Error -->
+        <?php if ($error_message): ?>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
+                <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Register Form -->
         <form action="process_register.php" method="POST" class="space-y-4">
             <div>
-                <label for="fullname" class="block text-gray-600 font-medium">Nama Lengkap</label>
-                <input type="text" id="fullname" name="fullname" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" placeholder="Masukkan nama lengkap" required>
+                <label for="nama" class="block text-gray-600 font-medium">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" class="w-full border-gray-300 rounded-lg p-2" placeholder="Masukkan nama lengkap" required>
             </div>
             <div>
                 <label for="email" class="block text-gray-600 font-medium">Email</label>
-                <input type="email" id="email" name="email" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" placeholder="Masukkan email" required>
+                <input type="email" id="email" name="email" class="w-full border-gray-300 rounded-lg p-2" placeholder="Masukkan email" required>
             </div>
             <div>
                 <label for="username" class="block text-gray-600 font-medium">Username</label>
-                <input type="text" id="username" name="username" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" placeholder="Masukkan username" required>
+                <input type="text" id="username" name="username" class="w-full border-gray-300 rounded-lg p-2" placeholder="Masukkan username" required>
             </div>
             <div>
                 <label for="password" class="block text-gray-600 font-medium">Password</label>
-                <input type="password" id="password" name="password" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" placeholder="Masukkan password" required>
+                <input type="password" id="password" name="password" class="w-full border-gray-300 rounded-lg p-2" placeholder="Masukkan password" required>
             </div>
-            <button type="submit" class="w-full bg-blue-500 text-white rounded-lg p-2 font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-400">Daftar</button>
+            <button type="submit" class="w-full bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-600">Daftar</button>
         </form>
-        <!-- Login Link -->
+
+        <!-- Link ke Login -->
         <p class="text-center text-gray-500 text-sm mt-4">
             Sudah memiliki akun? <a href="login.php" class="text-blue-500 hover:underline">Login disini</a>
         </p>

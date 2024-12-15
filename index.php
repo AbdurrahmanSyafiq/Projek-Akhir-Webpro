@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+// Cek jika user sudah login, ambil username dari session
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +27,17 @@
             <!-- Menu Items -->
             <ul class="flex space-x-6 text-gray-600">
                 <li><a href="#" class="hover:text-gray-900">Home</a></li>
-                <li><a href="#" class="hover:text-gray-900">Penjadwalan Konsultasi</a></li>
-                <li><a href="#" class="hover:text-gray-900">Rekam Medis</a></li>
-                <li><a href="#" class="hover:text-gray-900">Dashboard (Admin Only)</a></li>
+                <li><a href="penjadwalan.php" class="hover:text-gray-900">Penjadwalan Konsultasi</a></li>
+                <li><a href="history.php" class="hover:text-gray-900">Rekam Medis</a></li>
                 <li>
-                    <a href="login.php" class="text-red-500 hover:text-red-700">Login/Register</a>
+                    <?php if ($username): ?>
+                        <!-- Jika user sudah login -->
+                        <span class="text-blue-500 font-semibold"><?php echo htmlspecialchars($username); ?></span>
+                        <a href="logout.php" class="text-red-500 hover:text-red-700 ml-4">Logout</a>
+                    <?php else: ?>
+                        <!-- Jika user belum login -->
+                        <a href="login.php" class="text-red-500 hover:text-red-700">Login/Register</a>
+                    <?php endif; ?>
                 </li>
             </ul>
         </div>
@@ -33,12 +46,14 @@
     <!-- Banner -->
     <div class="bg-white text-black py-20">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">Selamat Datang di <span class="text-red-500">Med</span><span class="text-blue-500">Pulse</span></h1>
+            <h1 class="text-4xl font-bold mb-4">
+                Selamat Datang di <span class="text-red-500">Med</span><span class="text-blue-500">Pulse</span>
+            </h1>
             <p class="text-lg">Kami siap membantu Anda dengan pelayanan terbaik.</p>
         </div>
     </div>
 
-    <!-- Additional Content (Optional) -->
+    <!-- Additional Content -->
     <div class="container mx-auto py-10 px-4">
         <h2 class="text-2xl font-semibold text-gray-700 mb-6">Fitur Utama</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

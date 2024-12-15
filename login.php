@@ -1,3 +1,11 @@
+<?php
+session_start();
+$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : null;
+$success_message = isset($_SESSION['success']) ? $_SESSION['success'] : null;
+unset($_SESSION['error']);
+unset($_SESSION['success']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +26,21 @@
         <!-- Welcome Text -->
         <h2 class="text-center text-2xl font-semibold text-gray-700 mb-4">Selamat Datang,</h2>
         <p class="text-center text-gray-500 mb-6">Silahkan login terlebih dahulu</p>
+
+        <!-- Success Message -->
+        <?php if ($success_message): ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+            <?php echo $success_message; ?>
+        </div>
+        <?php endif; ?>
+
+        <!-- Error Message -->
+        <?php if ($error_message): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
+            <?php echo $error_message; ?>
+        </div>
+        <?php endif; ?>
+
         <!-- Login Form -->
         <form action="process_login.php" method="POST" class="space-y-4">
             <div>
@@ -30,6 +53,7 @@
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white rounded-lg p-2 font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-400">Login</button>
         </form>
+
         <!-- Register Link -->
         <p class="text-center text-gray-500 text-sm mt-4">
             Belum terdaftar sebagai pasien? <a href="register.php" class="text-blue-500 hover:underline">Daftar disini</a>
