@@ -8,7 +8,15 @@ session_start();
 // }
 
 // Ambil username dari session
+// Ambil data session
 $username = $_SESSION['username'];
+$role = $_SESSION['role'];
+
+// Jika role adalah admin, redirect ke dashboard
+if ($role === 'admin') {
+    header('Location: login.php');
+    exit();
+}
 
 // Koneksi ke database
 $conn = new mysqli("localhost", "root", "", "penjadwalan_konsultasi");

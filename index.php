@@ -1,8 +1,21 @@
 <?php
 session_start();
 
-// Cek jika user sudah login, ambil username dari session
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+// Cek jika user sudah login
+if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
+    header('Location: login.php'); // Redirect ke login jika belum login
+    exit();
+}
+
+// Ambil data session
+$username = $_SESSION['username'];
+$role = $_SESSION['role'];
+
+// Jika role adalah admin, redirect ke dashboard
+if ($role === 'admin') {
+    header('Location: login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,14 +43,8 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
                 <li><a href="penjadwalan.php" class="hover:text-gray-900">Penjadwalan Konsultasi</a></li>
                 <li><a href="history.php" class="hover:text-gray-900">Rekam Medis</a></li>
                 <li>
-                    <?php if ($username): ?>
-                        <!-- Jika user sudah login -->
-                        <span class="text-blue-500 font-semibold"><?php echo htmlspecialchars($username); ?></span>
-                        <a href="logout.php" class="text-red-500 hover:text-red-700 ml-4">Logout</a>
-                    <?php else: ?>
-                        <!-- Jika user belum login -->
-                        <a href="login.php" class="text-red-500 hover:text-red-700">Login/Register</a>
-                    <?php endif; ?>
+                    <span class="text-blue-500 font-semibold"><?php echo htmlspecialchars($username); ?></span>
+                    <a href="logout.php" class="text-red-500 hover:text-red-700 ml-4">Logout</a>
                 </li>
             </ul>
         </div>
